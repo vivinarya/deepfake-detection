@@ -38,7 +38,7 @@ SafeGuard bridges MediaPipe FaceMesh landmark tracking, green-channel hemoglobin
 
 ## Architecture Overview
 
-![Safeguard Architecture Diagram](assets/architecture_diagram.png)
+![Safeguard Architecture Diagram](assets/safeguard_serverless_rppg_deepfake_detection.png)
 
 ```plaintext
 safeguard/
