@@ -1,0 +1,64 @@
+name: SafeGuard CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-and-validate:
+    name: Lint & Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: safeguard
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Linting & Test Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff pytest
+
+      - name: Lint Codebase
+        run: |
+          ruff check . --ignore E501
+
+      - name: Run Pytest (if tests exist)
+        run: |
+          if [ -d "tests" ]; then
+            pytest tests/ -v
+          else
+            echo "No test directory found, skipping pytest."
+          fi
+
+  docker-build-check:
+    name: Container Build Verification
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: safeguard
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Verify Dockerfile Syntax
+        run: |
+          if [ -s "backend/Dockerfile" ]; then
+            docker build -t safeguard-backend:latest ./backend
+          else
+            echo "backend/Dockerfile is currently a placeholder, skipping container build."
+          fi
