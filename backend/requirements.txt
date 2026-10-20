@@ -4,6 +4,9 @@ uvicorn==0.30.6
 numpy==1.26.4
 scipy==1.14.1
 opencv-python-headless==4.10.0.84
+ml-dtypes==0.4.0
+jax==0.4.30
+jaxlib==0.4.30
 mediapipe==0.10.14
 boto3==1.35.0
 python-multipart==0.0.9
