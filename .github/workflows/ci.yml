@@ -10,9 +10,6 @@ jobs:
   lint-and-validate:
     name: Lint & Validation
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: safeguard
 
     steps:
       - name: Checkout Repository
@@ -44,9 +41,6 @@ jobs:
   docker-build-check:
     name: Container Build Verification
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: safeguard
 
     steps:
       - name: Checkout Repository
