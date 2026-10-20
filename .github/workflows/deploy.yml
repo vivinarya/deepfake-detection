@@ -13,9 +13,6 @@ jobs:
   deploy-infra:
     name: Deploy to AWS Lambda & CDK
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: safeguard
 
     steps:
       - name: Checkout Repository
